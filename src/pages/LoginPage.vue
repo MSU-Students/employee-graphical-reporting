@@ -1,7 +1,10 @@
 <template>
 
+<div>
+<img src="~assets/images/ForLandingPage.jpeg" style="width-device-width"/>
+
 <div class="absolute-center ">
-  <q-card class="bg-grey text-center">
+  <q-card class="bg-grey text-center" >
      <div class= "text-center text-h5 text-bold text-italic">
     Login Page
   </div>
@@ -45,7 +48,7 @@
 </div>
 
 </div>
-
+ </div>
 </template>
 
 <script>
