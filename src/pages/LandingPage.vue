@@ -1,15 +1,13 @@
 <template>
-  <q-card class="my-card">
+<q-card class="my card bg-blue-grey-14">
     <q-card-section>
       <img src="~assets/images/HRDO.jpg" style="height: 300px" />
-    </q-card-section>
-
-    <q-card-section class="q-pt-md text-center absolute-center bg-blue-grey-2">
+      <q-card-section class="q-pt-md text-center absolute-center bg-blue-grey-2">
       {{ message }}
     </q-card-section>
-  </q-card>
+    </q-card-section>
 
-  <div class="q-pa-md q-gutter-sm">
+      <div class="q-pa-md q-gutter-sm absolute-bottom-right">
     <q-btn
       color="blue-grey-2"
       text-color="black"
@@ -17,6 +15,8 @@
       to="LoginPage"
     />
   </div>
+</q-card>
+
 </template>
 
 <script>
