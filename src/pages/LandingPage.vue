@@ -5,7 +5,7 @@
         <img
           class="absolute-center q-pt-md abso"
           src="~assets/images/ForLandingPage.jpeg"
-          style="height: 500px"
+          style="height: 500px; max-width: 300px"
         />
       </q-card>
     </div>

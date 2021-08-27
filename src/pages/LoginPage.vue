@@ -1,7 +1,7 @@
 <template>
 <q-page class= "bg-image">
     <div class="absolute-center">
-      <q-card class="text-center bg-grey">
+      <q-card class="text-center">
         <div class="text-center text-h5 text-bold text-italic q-pt-md">Login Page</div>
 
         <div>
