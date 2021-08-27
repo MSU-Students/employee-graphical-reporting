@@ -1,8 +1,10 @@
 <template>
-<q-page class= "bg-image">
+  <q-page class="bg-image">
     <div class="absolute-center">
       <q-card class="text-center">
-        <div class="text-center text-h5 text-bold text-italic q-pt-md">Login Page</div>
+        <div class="text-center text-h5 text-bold text-italic q-pt-md">
+          Login Page
+        </div>
 
         <div>
           <div class="q-pa-md">
@@ -48,15 +50,10 @@
       </q-card>
 
       <div class="q-pa-md q-gutter-sm">
-        <q-btn
-          color="blue-grey-3"
-          text-color="black"
-          label="back"
-          to="/"
-        />
+        <q-btn color="blue-grey-3" text-color="black" label="back" to="/" />
       </div>
     </div>
-    </q-page>
+  </q-page>
 </template>
 
 <script>
