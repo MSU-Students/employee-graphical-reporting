@@ -1,32 +1,40 @@
 <template>
-<q-page class="bg-image">
+  <q-page class="bg-image">
     <div class="absolute-center">
-      <q-card class="text-center bg-transparent">
-        <div class="text-center text-h5 text-bold text-italic q-pt-md">
+      <q-card class="text-center">
+        <div class="text-center text-h5 text-bold font q-pt-md">
           Login Page
         </div>
 
         <div>
           <div class="q-pa-md">
             <div class="q-gutter-md row items-start">
-              <q-input v-model="name" label="Username" style="width: 300px" />
-            </div>
-          </div>
-
-          <q-input
-            v-model="pass"
-            label="Password"
-            filled
-            :type="isPwd ? 'Password' : 'text'"
-          >
-            <template v-slot:append>
-              <q-icon
-                :name="isPwd ? 'visibility_off' : 'visibility'"
-                class="cursor-pointer"
-                @click="isPwd = !isPwd"
+              <q-input
+                v-model="Username"
+                filled
+                :type="Username"
+                label="Username"
+                style="width: 300px"
               />
-            </template>
-          </q-input>
+            </div>
+
+            <q-input
+              class="q-pt-md"
+              v-model="Password"
+              filled
+              :type="isPwd ? 'password' : 'text'"
+              label="Password"
+              style="width: 300px"
+            >
+              <template v-slot:append>
+                <q-icon
+                  :name="isPwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="isPwd = !isPwd"
+                />
+              </template>
+            </q-input>
+          </div>
         </div>
 
         <div class="q-pa-md" color="black">
@@ -41,7 +49,7 @@
 
         <div class="q-pa-md q-gutter-sm">
           <q-btn
-            color="blue-grey-3"
+            color="grey-3"
             text-color="black"
             label="login"
             style="width: 250px"
@@ -50,18 +58,18 @@
       </q-card>
 
       <div class="q-pa-md q-gutter-sm">
-        <q-btn color="blue-grey-3" text-color="black" label="back" to="/" />
+        <q-btn color="grey-3" text-color="black" label="back" to="/" />
       </div>
     </div>
-    </q-page>
+  </q-page>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      name: "",
-      pass: "",
+      Username: "",
+      Password: "",
       isPwd: true,
       shape: "",
     };
