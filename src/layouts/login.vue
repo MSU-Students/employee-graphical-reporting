@@ -20,7 +20,7 @@
 
 <style>
 .bg-image {
-  background-image: url(../assets/images/LoginPage.jpg);
+  background-image: url(../assets/images/ForLandingPage.jpeg);
   background-blend-mode: overlay;
   background-position: center;
   background-size: 100%;

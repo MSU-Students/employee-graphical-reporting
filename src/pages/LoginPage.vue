@@ -1,5 +1,5 @@
 <template>
-  <q-page class="bg-image">
+<q-page class="bg-image">
     <div class="absolute-center">
       <q-card class="text-center">
         <div class="text-center text-h5 text-bold text-italic q-pt-md">
@@ -53,7 +53,7 @@
         <q-btn color="blue-grey-3" text-color="black" label="back" to="/" />
       </div>
     </div>
-  </q-page>
+    </q-page>
 </template>
 
 <script>
