@@ -1,12 +1,12 @@
 <template>
   <q-page class="bg-image">
     <div class="absolute-center">
-      <q-card class="text-center">
-        <div class="text-center text-h5 text-bold q-pt-md">
+      <q-card class="text-center bg-transparent">
+        <div class="login-box text-center text-h5 text-white q-pt-md">
           Login Page
         </div>
 
-        <div>
+        <div class="q-pt-md">
           <div class="q-pa-md">
             <div class="q-gutter-md row items-start">
               <q-input

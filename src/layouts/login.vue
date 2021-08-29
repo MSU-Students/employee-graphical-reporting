@@ -25,4 +25,7 @@
   background-position: center;
   background-size: 100%;
 }
+.login-box {
+  border-bottom: 2px solid;
+}
 </style>
