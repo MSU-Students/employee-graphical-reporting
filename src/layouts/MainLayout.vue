@@ -84,9 +84,9 @@ export default class MainLayout extends Vue {
 
 <style>
 .bg-image {
-  background-image: url(../assets/images/tryagain.jpg);
+  background-image: url(../assets/images/Capture.jpg);
   background-blend-mode: overlay;
   background-position: center;
-  background-size: 100%;
+  background-size: desktop;
 }
 </style>

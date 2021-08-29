@@ -2,7 +2,7 @@
   <q-page class="bg-image">
     <div class="absolute-center">
       <q-card class="text-center">
-        <div class="text-center text-h5 text-bold font q-pt-md">
+        <div class="text-center text-h5 text-bold q-pt-md">
           Login Page
         </div>
 
