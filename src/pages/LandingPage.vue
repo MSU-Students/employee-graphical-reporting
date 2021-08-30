@@ -1,28 +1,45 @@
 <template>
-  <div class="q-gutter-sm absolute-top-left">
-        <q-btn
-        color="blue-grey-2"
-        text-color="black"
-        label="login"
-        to="LoginPage"
-      />
-      </div>
-  <q-card class="my-card">
-    <q-card-section>
-      <img src="~assets/images/msu.jpg" style="height: 300px" />
-    </q-card-section>
-    <q-card
-      class="
-        q-pt-md q-pb-md q-pl-md q-pr-md
-        text-center text-weight-medium text-subtitle1
-        absolute-center
-        text-black
-        bg-grey-3
-      "
-    >
-      {{ message }}
+  <div>
+    <q-card class="my-card">
+      <q-responsive :ratio="16 / 9" class="col" style="max-height: 350px">
+        <q-card-section class="column dimmed">
+          <img class="col" src="~assets/images/msu.jpg" />
+        </q-card-section>
+      </q-responsive>
+      <q-card
+        class="
+          q-pt-md q-pb-md q-pl-md q-pr-md
+          text-center text-subtitle1
+          absolute-center
+          text-black
+          bg-grey-4
+        "
+      >
+        {{ message }}
+      </q-card>
     </q-card>
-  </q-card>
+
+    <q-page>
+      <q-card-section class="absolute-center">
+        <div
+          class="text-center text-bold text-h4 q-pt-md"
+        >
+          Sample Dashboard!
+          <img src="~assets/images/trylangg.jpg" width="720" height="440" />
+        </div>
+      </q-card-section>
+
+      <div class="q-gutter-sm q-pt-md absolute-right">
+        <q-btn
+          color="blue-grey-4"
+          style="border: 3px solid"
+          text-color="black"
+          label="login"
+          to="LoginPage"
+        />
+      </div>
+    </q-page>
+  </div>
 </template>
 
 <script>
