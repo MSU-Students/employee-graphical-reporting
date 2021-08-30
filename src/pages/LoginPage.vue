@@ -49,8 +49,8 @@
 
         <div class="q-pa-md q-gutter-sm">
           <q-btn
-            color="grey-3"
-            text-color="black"
+            class="btn"
+            text-color="whit"
             label="login"
             style="width: 250px"
           />

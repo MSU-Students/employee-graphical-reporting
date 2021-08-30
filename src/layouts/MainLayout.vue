@@ -16,15 +16,6 @@
       <q-page-container>
         <router-view />
       </q-page-container>
-      
-  <div class="q-gutter-sm absolute">
-        <q-btn
-        color="blue-grey-2"
-        text-color="black"
-        label="login"
-        to="LoginPage"
-      />
-      </div>
     </q-layout>
   </div>
 </template>
@@ -90,12 +81,3 @@ export default class MainLayout extends Vue {
   }
 }
 </script>
-
-<style>
-.bg-image {
-  background-image: url(~assets/images/msu.jpg);
-  background-blend-mode: Chrome 35;
-  background-size: cover;
-  background-position: center;
-}
-</style>

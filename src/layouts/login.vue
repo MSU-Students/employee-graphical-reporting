@@ -28,4 +28,8 @@
 .login-box {
   border-bottom: 2px solid;
 }
+.btn {
+  background: none;
+  border: 1px solid;
+}
 </style>
