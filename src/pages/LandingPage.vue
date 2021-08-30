@@ -1,14 +1,28 @@
 <template>
-  <q-page class="bg-image">
-    <q-card class="my-card bg-transparent">
-      <q-card-section>
-        <img src="~assets/images/HRDO.jpg" style="height: 300px" />
-      </q-card-section>
-      <q-card class="q-pt-md q-pb-md q-pl-md q-pr-md text-center text-weight-medium text-subtitle1 absolute-center text-black bg-grey-3">
-        {{ message }}
-      </q-card>
+  <div class="q-gutter-sm absolute-top-left">
+        <q-btn
+        color="blue-grey-2"
+        text-color="black"
+        label="login"
+        to="LoginPage"
+      />
+      </div>
+  <q-card class="my-card">
+    <q-card-section>
+      <img src="~assets/images/msu.jpg" style="height: 300px" />
+    </q-card-section>
+    <q-card
+      class="
+        q-pt-md q-pb-md q-pl-md q-pr-md
+        text-center text-weight-medium text-subtitle1
+        absolute-center
+        text-black
+        bg-grey-3
+      "
+    >
+      {{ message }}
     </q-card>
-  </q-page>
+  </q-card>
 </template>
 
 <script>
