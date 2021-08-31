@@ -50,15 +50,15 @@
         <div class="q-pa-md q-gutter-sm">
           <q-btn
             class="btn"
-            text-color="whit"
             label="login"
             style="width: 250px"
+            to="HomePageAdmin"
           />
         </div>
       </q-card>
 
       <div class="q-pa-md q-gutter-sm">
-        <q-btn color="grey-3" text-color="black" label="back" to="/" />
+        <q-btn color="blue-grey-3" text-color="black" label="cancel" to="/" />
       </div>
     </div>
   </q-page>

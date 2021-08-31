@@ -3,7 +3,7 @@
     <q-card class="my-card">
       <q-responsive :ratio="16 / 9" class="col" style="max-height: 350px">
         <q-card-section class="column">
-          <img class="col dimmed" src="~assets/images/msu.jpg" />
+          <img class="col" src="~assets/images/msu.jpg" />
         </q-card-section>
       </q-responsive>
       <q-card
