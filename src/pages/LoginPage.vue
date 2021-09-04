@@ -52,7 +52,6 @@
             class="btn"
             label="login"
             style="width: 250px"
-            to="HomePageAdmin"
           />
         </div>
       </q-card>
