@@ -16,19 +16,11 @@
     <q-drawer v-model="left" show-if-above bordered>
       <q-scroll-area class="fit">
         <q-list padding>
-          <q-item clickable v-ripple to="/ManageAccount">
-            <q-item-section avatar>
-              <q-icon name="how_to_reg" />
-            </q-item-section>
-
-            <q-item-section> Manage Account </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple to="/ManageEmployee">
+          <q-item clickable v-ripple to="/ViewEmployee">
             <q-item-section avatar>
               <q-icon name="perm_identity" />
             </q-item-section>
-            <q-item-section> Manage Employee </q-item-section>
+            <q-item-section> View Employee </q-item-section>
           </q-item>
 
           <q-item clickable v-ripple to="/GenerateReport">
@@ -44,7 +36,6 @@
             <q-item-section avatar>
               <q-icon name="logout" />
             </q-item-section>
-
             <q-item-section> Logout </q-item-section>
           </q-item>
         </q-list>
@@ -71,9 +62,9 @@ export default {
 
 <style>
 .bg-image {
-  background-image: url(~assets/images/admin1.jpg);
+  background-image: url(~assets/images/director.jpg);
   background-blend-mode: overlay;
   background-position: center;
-  background-size: 100%;
+  background-size: cover;
 }
 </style>

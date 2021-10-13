@@ -23,7 +23,8 @@
   background-image: url(~assets/images/tryagain.jpg);
   background-blend-mode: overlay;
   background-position: center;
-  background-size: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .login-box {
   border-bottom: 2px solid;

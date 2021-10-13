@@ -7,7 +7,6 @@ const routes: RouteRecordRaw[] = [
     children: [
     { path: '/', component: () => import('pages/LandingPage.vue') },
   ]
-
   },
 
   {
@@ -22,11 +21,21 @@ const routes: RouteRecordRaw[] = [
     path: '/HomeAdmin',
     component: () => import('layouts/HomeAdmin.vue'),
     children: [
+    { path: '/HomeAdmin', component: () => import('pages/HomeAdmin.vue') },
     { path: '/ManageAccount', component: () => import('pages/ManageAccount.vue') },
     { path: '/ManageEmployee', component: () => import('pages/ManageEmployee.vue') },
     { path: '/GenerateReport', component: () => import('pages/GenerateReport.vue') },
   ]
-  
+  },
+
+  {
+    path: '/HomeDirector',
+    component: () => import('layouts/HomeDirector.vue'),
+    children: [
+    { path: '/HomeDirector', component: () => import('pages/HomeDirector.vue') },
+    { path: '/ViewEmployee', component: () => import('pages/ViewEmployee.vue') },
+    { path: '/GenerateReport', component: () => import('pages/GenerateReport.vue') },
+  ]
   },
 
   // Always leave this as last one,

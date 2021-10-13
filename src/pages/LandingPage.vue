@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-card class="my-card">
-      <q-responsive :ratio="16 / 9" class="col" style="max-height: 350px">
+      <q-responsive :ratio="16 / 9" style="max-height: 350px">
         <q-card-section class="column">
           <img class="col" src="~assets/images/msu.jpg" />
         </q-card-section>
@@ -21,9 +21,7 @@
 
     <q-page>
       <q-card-section class="absolute-center">
-        <div
-          class="text-center text-bold text-h4 q-pt-md"
-        >
+        <div class="text-center text-bold text-h4 q-pt-md">
           Sample Dashboard!
           <img src="~assets/images/trylangg.jpg" width="720" height="440" />
         </div>

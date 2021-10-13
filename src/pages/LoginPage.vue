@@ -48,11 +48,7 @@
         </div>
 
         <div class="q-pa-md q-gutter-sm">
-          <q-btn
-            class="btn"
-            label="login"
-            style="width: 250px"
-          />
+          <q-btn class="btn" label="login" style="width: 250px" />
         </div>
       </q-card>
 
