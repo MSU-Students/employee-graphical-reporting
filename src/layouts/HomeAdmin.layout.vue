@@ -33,7 +33,7 @@
 
           <q-item clickable v-ripple to="/GenerateReport">
             <q-item-section avatar>
-              <q-icon name="" />
+              <q-icon name="report" />
             </q-item-section>
             <q-item-section> Generate Report </q-item-section>
           </q-item>
