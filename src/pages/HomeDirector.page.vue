@@ -1,12 +1,14 @@
 <template>
-  <q-page class="bg-image">
+  <q-page>
     <div class="q-pt-xl flex flex-center">
       <q-avatar size="200px" class="q-mb-sm">
-        <img src="~assets/images/HRDO.jpg" />
+        <img src="~assets/images/director2.jpg" />
       </q-avatar>
     </div>
-    <div class="flex flex-center q-pa-sm text-weight-bold text-body1">
-      ADMIN
+    <div
+      class="flex flex-center q-pa-sm text-weight-bold text-body1 text-white"
+    >
+      DIRECTOR
     </div>
 
     <div class="q-pa-md flex flex-center">
@@ -26,7 +28,7 @@
             "
             :style="props.selected ? 'transform: scale(0.95);' : ''"
           >
-            <q-card bordered>
+            <q-card dark bordered>
               <div class="q-pa-md">
                 <q-list>
                   <q-item
@@ -36,13 +38,16 @@
                     :key="col.name"
                   >
                     <q-item-section>
-                      <div class="q-pl-md text-h7">
-                        {{ col.label }}
-                      </div>
+                      <q-item-label>
+                        <div class="q-pl-md text-h7">
+                          {{ col.label }}
+                        </div>
+                      </q-item-label>
                     </q-item-section>
+
                     <q-item-section side>
                       <q-item-label caption>
-                        <div class="q-pr-md text-bold text-black text-italic">
+                        <div class="q-pr-md text-bold text-white text-italic">
                           {{ col.value }}
                         </div>
                       </q-item-label>
@@ -58,43 +63,36 @@
   </q-page>
 </template>
 
-<script>
-import { ref } from "vue";
+<script lang="ts">
+import { Vue } from "vue-class-component";
 
-export default {
-  setup() {
-    return {
-      filter: ref(""),
-      selected: ref([]),
-      columns,
-      rows,
-    };
-  },
-};
+export default class HomeDirectorPage extends Vue {
+  filter = '';
+  selected = [];
+  columns = [
+    { name: "Name", label: "Name:", field: "Name" },
+    {
+      name: "Department",
+      align: "center",
+      label: "Department:",
+      field: "Department",
+      sortable: true,
+    },
+    { name: "Email", label: "E-mail:", field: "Email", sortable: true },
+    { name: "Address", label: "Address:", field: "Address" },
+    { name: "Mobile_Number", label: "Mobile Number:", field: "Mobile_Number" },
+    { name: "Designation", label: "Designation:", field: "Designation" },
+  ];
 
-const columns = [
-  { name: "Name", label: "Name:", field: "Name" },
-  {
-    name: "Department",
-    align: "center",
-    label: "Department:",
-    field: "Department",
-    sortable: true,
-  },
-  { name: "Email", label: "E-mail:", field: "Email", sortable: true },
-  { name: "Address", label: "Address:", field: "Address" },
-  { name: "Mobile_Number", label: "Mobile Number:", field: "Mobile_Number" },
-  { name: "Designation", label: "Designation:", field: "Designation" },
-];
-
-const rows = [
-  {
-    Name: "Reshyl B. Maruhom",
-    Department: "HRDO",
-    Email: "reshylmaruhom@gmail.com",
-    Address: "5th Street",
-    Mobile_Number: "09300938968",
-    Designation: "Admin",
-  },
-];
+  rows = [
+    {
+      Name: "Riza B. Maruhom",
+      Department: "HRDO",
+      Email: "rizamaruhom@gmail.com",
+      Address: "5th Street",
+      Mobile_Number: "09300938968",
+      Designation: "Director",
+    },
+  ];
+}
 </script>

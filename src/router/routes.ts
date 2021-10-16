@@ -3,38 +3,38 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('src/layouts/MainLayout.layout.vue'),
     children: [
-    { path: '/', component: () => import('pages/LandingPage.vue') },
+    { path: '/', component: () => import('src/pages/Landing.page.vue') },
   ]
   },
 
   {
     path: '/login',
-    component: () => import('layouts/login.vue'),
+    component: () => import('src/layouts/Login.layout.vue'),
     children: [
-    { path: '/LoginPage', component: () => import('pages/LoginPage.vue') },
+    { path: '/LoginPage', component: () => import('src/pages/Login.page.vue') },
   ]
   },
 
   {
     path: '/HomeAdmin',
-    component: () => import('layouts/HomeAdmin.vue'),
+    component: () => import('src/layouts/HomeAdmin.layout.vue'),
     children: [
-    { path: '/HomeAdmin', component: () => import('pages/HomeAdmin.vue') },
-    { path: '/ManageAccount', component: () => import('pages/ManageAccount.vue') },
-    { path: '/ManageEmployee', component: () => import('pages/ManageEmployee.vue') },
-    { path: '/GenerateReport', component: () => import('pages/GenerateReport.vue') },
+    { path: '/HomeAdmin', component: () => import('src/pages/HomeAdmin.page.vue') },
+    { path: '/ManageAccount', component: () => import('src/pages/ManageAccount.page.vue') },
+    { path: '/ManageEmployee', component: () => import('src/pages/ManageEmployee.page.vue') },
+    { path: '/GenerateReport', component: () => import('src/pages/GenerateReport.page.vue') },
   ]
   },
 
   {
     path: '/HomeDirector',
-    component: () => import('layouts/HomeDirector.vue'),
+    component: () => import('src/layouts/HomeDirector.layout.vue'),
     children: [
-    { path: '/HomeDirector', component: () => import('pages/HomeDirector.vue') },
-    { path: '/ViewEmployee', component: () => import('pages/ViewEmployee.vue') },
-    { path: '/GenerateReport', component: () => import('pages/GenerateReport.vue') },
+    { path: '/HomeDirector', component: () => import('src/pages/HomeDirector.page.vue') },
+    { path: '/ViewEmployee', component: () => import('src/pages/ViewEmployee.page.vue') },
+    { path: '/GenerateReport', component: () => import('src/pages/GenerateReport.page.vue') },
   ]
   },
 

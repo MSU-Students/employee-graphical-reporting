@@ -48,7 +48,12 @@
         </div>
 
         <div class="q-pa-md q-gutter-sm">
-          <q-btn class="btn" label="login" style="width: 250px" />
+          <q-btn
+            class="btn"
+            label="login"
+            style="width: 250px"
+            to="HomeAdmin"
+          />
         </div>
       </q-card>
 
@@ -59,15 +64,13 @@
   </q-page>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      Username: "",
-      Password: "",
-      isPwd: true,
-      shape: "",
-    };
-  },
-};
+<script lang="ts">
+import { Vue } from "vue-class-component";
+
+export default class LoginPage extends Vue {
+  Username = "";
+  Password = "";
+  isPwd = true;
+  shape = "";
+}
 </script>

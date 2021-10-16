@@ -53,20 +53,18 @@
 
     <q-page-container>
       <q-page class="bg-image">
-      <router-view />
+        <router-view />
       </q-page>
     </q-page-container>
   </q-layout>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      left: false,
-    };
-  },
-};
+<script lang="ts">
+import { Vue } from "vue-class-component";
+
+export default class HomeAdminLayout extends Vue {
+  left = false;
+}
 </script>
 
 <style>
