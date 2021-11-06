@@ -10,16 +10,16 @@
     <div class="q-pa-md">
       <q-table
         class="flex flex-center"
-        title="Employee List:"
+        title="Employee Lists:"
         :rows="rows"
         :columns="columns"
         row-key="name"
         :rows-per-page-options="[0]"
-        :filter="filter"
       >
         <template v-slot:top-right>
           <div class="q-pa-md q-gutter-sm row">
             <q-input
+              color="brown"
               outlined
               dense
               debounce="300"
@@ -71,49 +71,49 @@ export default class ViewEmployeePage extends Vue {
       name: "id",
       required: true,
       label: "ID",
-      align: "right",
+      align: "left",
       field: "id",
     },
     {
       name: "name",
-      align: "center",
+      align: "left",
       label: "Name",
       field: "name",
     },
-    { name: "address", align: "center", label: "Address", field: "address" },
-    { name: "age", align: "center", label: "Age", field: "age" },
+    { name: "address", align: "left", label: "Address", field: "address" },
+    { name: "age", align: "left", label: "Age", field: "age" },
     {
       name: "appointment",
-      align: "center",
+      align: "left",
       label: "Appointment",
       field: "appointment",
     },
     {
       name: "citizenship",
-      align: "center",
+      align: "left",
       label: "Citizenship",
       field: "citizenship",
     },
-    { name: "status", align: "center", label: "Status", field: "status" },
-    { name: "position", align: "center", label: "Position", field: "position" },
-    { name: "religion", align: "center", label: "Religion", field: "religion" },
-    { name: "salary", align: "center", label: "Salary", field: "salary" },
-    { name: "sex", align: "center", label: "Sex", field: "sex" },
+    { name: "status", align: "left", label: "Status", field: "status" },
+    { name: "position", align: "left", label: "Position", field: "position" },
+    { name: "religion", align: "left", label: "Religion", field: "religion" },
+    { name: "salary", align: "left", label: "Salary", field: "salary" },
+    { name: "sex", align: "left", label: "Sex", field: "sex" },
     {
       name: "work_status",
-      align: "center",
+      align: "left",
       label: "Work Status",
       field: "work_status",
     },
     {
       name: "department",
-      align: "center",
+      align: "left",
       label: "Department",
       field: "department",
     },
     {
       name: "bank_membership",
-      align: "center",
+      align: "left",
       label: "Bank Membership",
       field: "bank_membership",
     },

@@ -9,10 +9,11 @@
       ADMIN
     </div>
 
-    <div class="q-pa-md flex flex-center">
+    <div class="q-px-xl flex flex-center">
       <q-table
         :rows="rows"
         :columns="columns"
+        row-key="name"
         grid
         hide-bottom
         :rows-per-page-options="[0]"

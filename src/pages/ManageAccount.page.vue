@@ -8,13 +8,10 @@
     <br />
 
     <q-table
-      title="Account List:"
-      title-class=""
       :rows="rows"
       :columns="columns"
       row-key="name"
       :rows-per-page-options="[0]"
-      :filter="filter"
       hide-bottom
     >
       <template v-slot:top>
@@ -77,8 +74,8 @@
                 />
               </q-card-section>
               <q-card-actions align="center">
-                <q-btn flat label="Cancel" color="red" v-close-popup />
-                <q-btn flat label="Add" color="primary" v-close-popup />
+                <q-btn label="Cancel" color="red-10" v-close-popup />
+                <q-btn label="Add" color="blue-10" />
               </q-card-actions>
             </q-card>
           </q-dialog>
@@ -102,7 +99,6 @@
                 color="blue-10"
                 icon="edit"
                 size="sm"
-                flat
                 dense
                 @click="editRow = true"
               />
@@ -157,8 +153,8 @@
                   </q-card-section>
 
                   <q-card-actions align="center">
-                    <q-btn flat label="Cancel" color="red" v-close-popup />
-                    <q-btn flat label="Add" color="primary" v-close-popup />
+                    <q-btn label="Cancel" color="red-10" v-close-popup />
+                    <q-btn label="Add" color="blue-10"/>
                   </q-card-actions>
                 </q-card>
               </q-dialog>
@@ -227,26 +223,26 @@ export default class ManageAccount extends Vue {
     },
     {
       name: "designation",
-      align: "center",
+      align: "left",
       label: "Designation",
       field: "designation",
     },
     {
       name: "department",
-      align: "center",
+      align: "left",
       label: "Department",
       field: "department",
     },
-    { name: "email", align: "center", label: "Email", field: "email" },
-    { name: "username", align: "center", label: "Username", field: "username" },
-    { name: "password", align: "center", label: "Password", field: "password" },
+    { name: "email", align: "left", label: "Email", field: "email" },
+    { name: "username", align: "left", label: "Username", field: "username" },
+    { name: "password", align: "left", label: "Password", field: "password" },
     {
       name: "dateCreated",
-      align: "center",
+      align: "left",
       label: "Date Created",
       field: "dateCreated",
     },
-    { name: "status", align: "center", label: "Status", field: "status" },
+    { name: "status", align: "left", label: "Status", field: "status" },
   ];
   rows = [
     {

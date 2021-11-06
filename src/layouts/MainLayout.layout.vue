@@ -1,23 +1,22 @@
 <template>
-  <div class="q-pa-md">
-    <q-layout view="lHh Lpr lFf">
-      <q-header elevated="q-px-lg q-py-md">
-        <q-toolbar class="bg-blue-grey-4">
-          <q-card flat class="col bg-transparent">
-            <div class="text-italic text-h4 text-bold text-center text-black">
-              MSU HRDO Management Information System with Graphical Reporting
-            </div>
-          </q-card>
+  <q-layout view="lHh Lpr lFf">
+    <q-header elevated class="bg-primary text-white">
+      <q-toolbar class="bg-blue-2">
+        <q-img src="~assets/ForLogo.gif" style="width: 100px"></q-img>
+        <div class="q-pl-md"/>
+        <q-img src="~assets/HRDOLogo.png" style="width: 200px"></q-img>
+        <q-card flat class="col bg-transparent">
+          <div class=" text-h4 text-bold text-center text-black">
+            MSU HRDO Management Information System with Graphical Reporting
+          </div>
+        </q-card>
+      </q-toolbar>
+    </q-header>
 
-          <q-img src="~assets/ForLogo.gif" style="width: 100px"></q-img>
-        </q-toolbar>
-      </q-header>
-
-      <q-page-container>
-        <router-view />
-      </q-page-container>
-    </q-layout>
-  </div>
+    <q-page-container>
+      <router-view />
+    </q-page-container>
+  </q-layout>
 </template>
 
 <script lang="ts">
@@ -81,3 +80,24 @@ export default class MainLayout extends Vue {
   }
 }
 </script>
+
+<style>
+.bg-image {
+  background-image: url(~assets/images/ForLandingPage.jpeg);
+  background-blend-mode: overlay;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.login-box {
+  border-bottom: 2px solid;
+}
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  padding: 40px 20px 20px;
+  background: rgba(255, 255, 255, 0.836);
+  border-radius: 10px;
+}
+</style>

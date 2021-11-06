@@ -5,15 +5,7 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     component: () => import('src/layouts/MainLayout.layout.vue'),
     children: [
-    { path: '/', component: () => import('src/pages/Landing.page.vue') },
-  ]
-  },
-
-  {
-    path: '/login',
-    component: () => import('src/layouts/Login.layout.vue'),
-    children: [
-    { path: '/LoginPage', component: () => import('src/pages/Login.page.vue') },
+    { path: '/', component: () => import('src/pages/Login.page.vue') },
   ]
   },
 
@@ -24,7 +16,8 @@ const routes: RouteRecordRaw[] = [
     { path: '/HomeAdmin', component: () => import('src/pages/HomeAdmin.page.vue') },
     { path: '/ManageAccount', component: () => import('src/pages/ManageAccount.page.vue') },
     { path: '/ManageEmployee', component: () => import('src/pages/ManageEmployee.page.vue') },
-    { path: '/GenerateReport', component: () => import('src/pages/GenerateReport.page.vue') },
+    { path: '/GenerateReportAdmin', component: () => import('src/pages/GenerateReportAdmin.page.vue') },
+
   ]
   },
 
@@ -34,7 +27,7 @@ const routes: RouteRecordRaw[] = [
     children: [
     { path: '/HomeDirector', component: () => import('src/pages/HomeDirector.page.vue') },
     { path: '/ViewEmployee', component: () => import('src/pages/ViewEmployee.page.vue') },
-    { path: '/GenerateReport', component: () => import('src/pages/GenerateReport.page.vue') },
+    { path: '/GenerateReportDirector', component: () => import('src/pages/GenerateReportDirector.page.vue') },
   ]
   },
 

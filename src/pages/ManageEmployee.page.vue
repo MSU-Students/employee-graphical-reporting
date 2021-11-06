@@ -1,31 +1,22 @@
 <template>
   <div class="q-pa-md">
     <div class="text-h4 text-bold flex flex-center">
-      <q-icon name="how_to_reg" />
-      Manage Account
+      <q-icon name="people" />
+      Manage Employee
     </div>
 
     <br />
 
     <q-table
-      title="List of Employees:"
-      title-class=""
-      :rows="rows"
+      :rows="Employee"
       :columns="columns"
       row-key="name"
       :rows-per-page-options="[0]"
-      :filter="filter"
       hide-bottom
     >
       <template v-slot:top>
         <div class="q-pa-md q-gutter-sm row">
-          <q-input
-            color="brown"
-            outlined
-            dense
-            v-model="filter"
-            placeholder="Search"
-          >
+          <q-input color="brown" outlined dense v-model="filter" placeholder="Search">
             <template v-slot:append>
               <q-icon name="search" />
             </template>
@@ -35,92 +26,99 @@
             label="Add New Profile"
             color="brown-10"
             icon="add"
-            @click="addUser = true"
+            @click="onNewEmployee()"
           />
-          <q-dialog v-model="addUser">
+          <q-dialog v-model="addEmployee">
             <q-card style="width: 600px">
               <q-card-section class="row">
-                <div class="text-h6">Form:</div>
+                <div class="text-h6">
+                  <q-icon name="assignment" />
+                  Form:
+                </div>
                 <q-space />
                 <q-btn flat round dense icon="close" v-close-popup />
               </q-card-section>
 
               <q-card-section class="q-gutter-y-sm">
+                <q-input v-model="presentEmployee.id" dense outlined label="ID">
+                </q-input>
                 <q-input
-                  v-model="id"
+                  v-model="presentEmployee.fName"
                   dense
                   outlined
-                  label="ID"
+                  label="First Name"
                 >
                 </q-input>
                 <q-input
-                  v-model="name"
+                  v-model="presentEmployee.mName"
                   dense
                   outlined
-                  label="Name"
+                  label="Middle Initial"
                 >
+                </q-input>
+                <q-input v-model="presentEmployee.lName" dense outlined label="Last Name">
                 </q-input>
                 <q-select
                   outlined
-                  v-model="membership"
+                  v-model="presentEmployee.membership"
                   :options="options"
                   label="Mambership"
                 />
                 <q-input
-                  v-model="address"
+                  v-model="presentEmployee.address"
                   dense
                   outlined
                   label="Address"
                 />
-                <q-input v-model="age" dense outlined label="Age" />
-                <q-input v-model="appointmentDate" dense outlined label="Appointment Date" />
-                <q-input v-model="citizenship" dense outlined label="Citizenship" />
+                <q-input v-model="presentEmployee.age" dense outlined label="Age" />
                 <q-input
-                  v-model="status"
+                  v-model="presentEmployee.appointmentDate"
                   dense
                   outlined
-                  label="Status"
+                  label="Appointment Date"
                 />
                 <q-input
-                  v-model="position"
+                  v-model="presentEmployee.citizenship"
+                  dense
+                  outlined
+                  label="Citizenship"
+                />
+                <q-input v-model="presentEmployee.status" dense outlined label="Status" />
+                <q-input
+                  v-model="presentEmployee.position"
                   dense
                   outlined
                   label="Position"
                 />
                 <q-input
-                  v-model="religion"
+                  v-model="presentEmployee.religion"
                   dense
                   outlined
                   label="Religion"
                 />
-                <q-input
-                  v-model="salary"
-                  dense
-                  outlined
-                  label="Salary"
-                />
-                <q-input
-                  v-model="gender"
-                  dense
+                <q-input v-model="presentEmployee.salary" dense outlined label="Salary" />
+                <q-select
+                  v-model="presentEmployee.gender"
                   outlined
                   label="Gender"
+                  :options="options"
                 />
                 <q-input
-                  v-model="workStatus"
+                  v-model="presentEmployee.workStatus"
                   dense
                   outlined
                   label="Work Status"
                 />
                 <q-input
-                  v-model="department"
+                  v-model="presentEmployee.department"
                   dense
                   outlined
                   label="Department"
                 />
               </q-card-section>
               <q-card-actions align="center">
-                <q-btn flat label="Cancel" color="red" v-close-popup />
-                <q-btn flat label="Add" color="primary" v-close-popup />
+                <q-btn label="Cancel" color="red-10" v-close-popup />
+                <q-btn label="Add" color="blue-10" v-close-popup />
               </q-card-actions>
             </q-card>
           </q-dialog>
@@ -140,8 +138,8 @@
           <div>
             <q-td>
               <q-btn
-                square
-                color="grey-6"
+                round
+                color="blue-10"
                 icon="edit"
                 size="sm"
                 @click="editRow = true"
@@ -155,82 +153,101 @@
                   </q-card-section>
 
                   <q-card-section class="q-gutter-y-sm">
-                <q-input
-                  v-model="id"
-                  dense
-                  outlined
-                  label="ID"
-                >
-                </q-input>
-                <q-input
-                  v-model="name"
-                  dense
-                  outlined
-                  label="Name"
-                >
-                </q-input>
-                <q-select
-                  outlined
-                  v-model="membership"
-                  :options="options"
-                  label="Mambership"
-                />
-                <q-input
-                  v-model="address"
-                  dense
-                  outlined
-                  label="Address"
-                />
-                <q-input v-model="age" dense outlined label="Age" />
-                <q-input v-model="appointmentDate" dense outlined label="Appointment Date" />
-                <q-input v-model="citizenship" dense outlined label="Citizenship" />
-                <q-input
-                  v-model="status"
-                  dense
-                  outlined
-                  label="Status"
-                />
-                <q-input
-                  v-model="position"
-                  dense
-                  outlined
-                  label="Position"
-                />
-                <q-input
-                  v-model="religion"
-                  dense
-                  outlined
-                  label="Religion"
-                />
-                <q-input
-                  v-model="salary"
-                  dense
-                  outlined
-                  label="Salary"
-                />
-                <q-input
-                  v-model="gender"
-                  dense
-                  outlined
-                  label="Gender"
-                />
-                <q-input
-                  v-model="workStatus"
-                  dense
-                  outlined
-                  label="Work Status"
-                />
-                <q-input
-                  v-model="department"
-                  dense
-                  outlined
-                  label="Department"
-                />
-              </q-card-section>
+                    <q-input v-model="presentEmployee.id" dense outlined label="ID">
+                    </q-input>
+                    <q-input
+                      v-model="presentEmployee.fName"
+                      dense
+                      outlined
+                      label="First Name"
+                    >
+                    </q-input>
+                    <q-input
+                      v-model="presentEmployee.mName"
+                      dense
+                      outlined
+                      label="Middle Initial"
+                    >
+                    </q-input>
+                    <q-input
+                      v-model="presentEmployee.lName"
+                      dense
+                      outlined
+                      label="Last Name"
+                    >
+                    </q-input>
+                    <q-select
+                      outlined
+                      v-model="presentEmployee.membership"
+                      :options="options"
+                      label="Mambership"
+                    />
+                    <q-input
+                      v-model="presentEmployee.address"
+                      dense
+                      outlined
+                      label="Address"
+                    />
+                    <q-input v-model="presentEmployee.age" dense outlined label="Age" />
+                    <q-input
+                      v-model="presentEmployee.appointmentDate"
+                      dense
+                      outlined
+                      label="Appointment Date"
+                    />
+                    <q-input
+                      v-model="presentEmployee.citizenship"
+                      dense
+                      outlined
+                      label="Citizenship"
+                    />
+                    <q-input
+                      v-model="presentEmployee.status"
+                      dense
+                      outlined
+                      label="Status"
+                    />
+                    <q-input
+                      v-model="presentEmployee.position"
+                      dense
+                      outlined
+                      label="Position"
+                    />
+                    <q-input
+                      v-model="presentEmployee.religion"
+                      dense
+                      outlined
+                      label="Religion"
+                    />
+                    <q-input
+                      v-model="presentEmployee.salary"
+                      dense
+                      outlined
+                      label="Salary"
+                    />
+                    <q-input
+                      v-model="presentEmployee.gender"
+                      dense
+                      outlined
+                      label="Gender"
+                    />
+                    <q-input
+                      v-model="presentEmployee.workStatus"
+                      dense
+                      outlined
+                      label="Work Status"
+                    />
+                    <q-input
+                      v-model="presentEmployee.department"
+                      dense
+                      outlined
+                      label="Department"
+                    />
+                  </q-card-section>
 
                   <q-card-actions align="center">
-                    <q-btn flat label="Cancel" color="red" v-close-popup />
-                    <q-btn flat label="Add" color="primary" v-close-popup />
+                    <q-btn label="Cancel" color="red-10" v-close-popup />
+                    <q-btn label="Add" color="blue-10" v-close-popup />
                   </q-card-actions>
                 </q-card>
               </q-dialog>
@@ -247,157 +264,114 @@
 </template>
 
 <script lang="ts">
+import { Info } from "src/store/Employee/state";
 import { Vue, Options } from "vue-class-component";
+import { mapActions, mapState } from "vuex";
 
-interface IRow {
-  name: string;
-}
-
-@Options({})
+@Options({
+  computed: {
+    ...mapState("Employee", ["employee"]),
+  },
+  methods: {
+    ...mapActions("Employee", ["newEmployee"]),
+  },
+})
 export default class ManageAccount extends Vue {
+  // vuex properties
+  Employee!: Info[];
+  newEmployee!: (Employee: Info) => Promise<void>;
+
+  //local
   columns = [
     {
       name: "id",
       required: true,
       label: "ID",
       align: "left",
-      field: 'id',
+      field: "id",
     },
     {
       name: "name",
       required: true,
       label: "Name",
       align: "left",
-      field: 'name',
+      field: (row: Info) => row.fName + row.mName + row.lName,
+      format: (val: string) => `${val}`,
     },
     {
       name: "membership",
-      align: "center",
+      align: "left",
       label: "Membership",
       field: "membership",
     },
-    { name: "address", align: "center", label: "Address", field: "address" },
-    { name: "age", align: "center", label: "Age", field: "age" },
-    { name: "appointmentDate", align: "center", label: "Appointment Date", field: "appointmentDate" },
-    { name: "citizenship", align: "center", label: "Citizenship", field: "citizenship" },
-    { name: "religion", align: "center", label: "Religion", field: "religion" },
-    { name: "status", align: "center", label: "Status", field: "status" },
-    { name: "position", align: "center", label: "Status", field: "status" },
-    { name: "salary", align: "center", label: "Salary", field: "salary" },
-    { name: "gender", align: "center", label: "Gender", field: "gender" },
-    { name: "workStatus", align: "center", label: "Work Status", field: "workStatus" },
-    { name: "department", align: "center", label: "Department", field: "department" },
-  ];
-  rows = [
+    { name: "address", align: "left", label: "Address", field: "address" },
+    { name: "age", align: "left", label: "Age", field: "age" },
     {
-      id: "201812500",
-      name: "Reshyl B. Maruhom",
-      membership: "",
-      address: "5th Street",
-      age: "23",
-      appointmentDate: "October 11, 2021",
-      citizenship: "Filipino",
-      religion: "Islam",
-      status: "Deactive",
-      position: "Manager I",
-      salary: "16,000.00",
-      gender: "Female",
-      workStatus: "Contructual",
-      department: "DSA",
+      name: "appointmentDate",
+      align: "left",
+      label: "Appointment Date",
+      field: "appointmentDate",
     },
     {
-      id: "201812505",
-      name: "Rohma S. Carim",
-      membership: "",
-      address: "Saguiaran",
-      age: "22",
-      appointmentDate: "Ocotober 11, 2021",
-      citizenship: "Filipino",
-      religion: "Islam",
-      status: "Active",
-      position: "Manager II",
-      salary: "17,000.00",
-      gender: "Female",
-      workStatus: "Contructual",
-      department: "Registrar",
+      name: "citizenship",
+      align: "left",
+      label: "Citizenship",
+      field: "citizenship",
+    },
+    { name: "religion", align: "left", label: "Religion", field: "religion" },
+    { name: "status", align: "left", label: "Status", field: "status" },
+    { name: "position", align: "left", label: "Position", field: "position" },
+    { name: "salary", align: "left", label: "Salary", field: "salary" },
+    { name: "gender", align: "left", label: "Gender", field: "gender" },
+    {
+      name: "workStatus",
+      align: "left",
+      label: "Work Status",
+      field: "workStatus",
     },
     {
-      id: "2018",
-      name: "Azimah D. Ampuan",
-      membership: "",
-      address: "Sarimanok",
-      age: "22",
-      appointmentDate: "October 11, 2021",
-      citizenship: "Filipino",
-      religion: "Islam",
-      status: "Active",
-      position: "Manager V",
-      salary: "18,000.00",
-      gender: "Female",
-      workStatus: "Item",
-      department: "OVCAA",
-
-    },
-    {
-      id: "2018",
-      name: "Inshidar P. Panganting",
-      membership: "",
-      address: "Saguiaran",
-      age: "22",
-      appointmentDate: "October 11, 2021",
-      citizenship: "Filipino",
-      religion: "Islam",
-      status: "Active",
-      position: "Manager IV",
-      salary: "19,000.00",
-      gender: "Female",
-      workStatus: "Item",
-      department: "HRDO",
-    },
-    {
-      id: "2018",
-      name: "Norol Izzah Abdulrahim",
-      membership: "",
-      address: "Bacolod Chico",
-      age: "21",
-      appointmentDate: "October 11, 2021",
-      citizenship: "Filipino",
-      religion: "Islam",
-      status: "Active",
-      position: "Manager III",
-      salary: "18,000.00",
-      gender: "Female",
-      workStatus: "Contructual",
-      department: "HRDO",
+      name: "department",
+      align: "left",
+      label: "Department",
+      field: "department",
     },
   ];
   dialog = false;
   cancelEnabled = true;
-  addUser = false;
+  addEmployee = false;
   editRow = false;
-  name = "";
-  id = "";
-  designation = "";
-  membership = "";
+  employee: Info = {
+    fName: " ",
+    mName: " ",
+    lName: " ",
+    id: " ",
+    membership: " ",
+    department: " ",
+    address: " ",
+    age: " ",
+    citizenship: " ",
+    appointmentDate: " ",
+    status: " ",
+    religion: " ",
+    position: " ",
+    salary: " ",
+    workStatus: " ",
+    gender: " ",
+  };
   filter = "";
   options = ["GSIS", "PHILHEALTH", "PAG-IBIG"];
-  department = "";
-  dateCreated = "";
-  address = "";
-  age = "";
-  appointment = "";
-  citizenship = "";
-  appointmentDate = "";
-  status = "";
-  religion = "";
-  position = "";
-  salary = "";
-  workStatus = "";
-  gender = "";
+  option = ["Male", "Female"];
+  presentEmployee = { ...this.employee };
 
-  onItemClick() {
-    console.log("Clicked!");
+  onNewEmployee() {
+    this.presentEmployee = { ...this.employee };
+    this.editRow = false;
+    this.addEmployee = true;
+  }
+  async onSaveEmployee() {
+    if (!this.editRow) {
+      await this.newEmployee(this.presentEmployee);
+    }
   }
 }
 </script>
-
