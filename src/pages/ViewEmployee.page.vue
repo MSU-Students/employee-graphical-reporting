@@ -1,20 +1,19 @@
 <template>
-  <q-page>
-    <div class="q-pt-xl flex flex-center q-pb-xl">
-      <div class="flex flex-center q-pt-md text-weight-bold text-h3">
-        <q-icon name="perm_identity" />
-        View Employee
-      </div>
+  <div class="q-pa-md">
+    <div class="text-h4 text-bold flex flex-center">
+      <q-icon name="perm_identity" />
+      View Employee
     </div>
 
-    <div class="q-pa-md">
+    <br />
+
       <q-table
-        class="flex flex-center"
         title="Employee Lists:"
-        :rows="rows"
+        :rows="employee"
         :columns="columns"
         row-key="name"
         :rows-per-page-options="[0]"
+        :filter="filter"
       >
         <template v-slot:top-right>
           <div class="q-pa-md q-gutter-sm row">
@@ -37,32 +36,26 @@
           <q-tr :props="props">
             <q-th auto-width />
             <q-th v-for="col in props.cols" :key="col.name" :props="props">
-              <div class="q-pr-xl q-pl-xl">
                 {{ col.label }}
-              </div>
             </q-th>
           </q-tr>
         </template>
-
-        <template v-slot:body="props">
-          <q-tr :props="props">
-            <div></div>
-
-            <q-td v-for="col in props.cols" :key="col.name" :props="props">
-              {{ col.value }}
-            </q-td>
-          </q-tr>
-        </template>
       </q-table>
-    </div>
-  </q-page>
+  </div>
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
+import { Info } from "src/store/employee/state";
+import { Options, Vue } from "vue-class-component";
+import { mapState } from "vuex";
 
+@Options({
+  computed: {
+    ...mapState("employee", ["employee", "activeEmployee"]),
+  },
+})
 export default class ViewEmployeePage extends Vue {
-  loading = false;
+  employee!: Info[];
 
   filter = "";
   selected = [];
@@ -76,17 +69,25 @@ export default class ViewEmployeePage extends Vue {
     },
     {
       name: "name",
-      align: "left",
+      required: true,
       label: "Name",
-      field: "name",
+      align: "left",
+      field: (row: Info) => row.fName + row.mName + row.lName,
+      format: (val: string) => `${val}`,
+    },
+    {
+      name: "membership",
+      align: "left",
+      label: "Membership",
+      field: "membership",
     },
     { name: "address", align: "left", label: "Address", field: "address" },
     { name: "age", align: "left", label: "Age", field: "age" },
     {
-      name: "appointment",
+      name: "appointmentDate",
       align: "left",
-      label: "Appointment",
-      field: "appointment",
+      label: "Appointment Date",
+      field: "appointmentDate",
     },
     {
       name: "citizenship",
@@ -94,110 +95,22 @@ export default class ViewEmployeePage extends Vue {
       label: "Citizenship",
       field: "citizenship",
     },
+    { name: "religion", align: "left", label: "Religion", field: "religion" },
     { name: "status", align: "left", label: "Status", field: "status" },
     { name: "position", align: "left", label: "Position", field: "position" },
-    { name: "religion", align: "left", label: "Religion", field: "religion" },
     { name: "salary", align: "left", label: "Salary", field: "salary" },
-    { name: "sex", align: "left", label: "Sex", field: "sex" },
+    { name: "gender", align: "left", label: "Gender", field: "gender" },
     {
-      name: "work_status",
+      name: "workStatus",
       align: "left",
       label: "Work Status",
-      field: "work_status",
+      field: "workStatus",
     },
     {
       name: "department",
       align: "left",
       label: "Department",
       field: "department",
-    },
-    {
-      name: "bank_membership",
-      align: "left",
-      label: "Bank Membership",
-      field: "bank_membership",
-    },
-  ];
-  rows = [
-    {
-      id: "201812500",
-      name: "Reshyl B. Maruhom",
-      address: "5th Street, MSU-MC, LDS",
-      age: "23",
-      appointment: "October 06, 2021",
-      citizenship: "Filipino",
-      status: "Active",
-      position: "Manager I",
-      religion: "Islam",
-      salary: "20,000.00",
-      sex: "Female",
-      work_status: "Daily Wage",
-      department: "HRDO",
-      bank_membership: "GSIS, PAG-IBIG, PHILHEALTH",
-    },
-    {
-      id: "201812505",
-      name: "Rohma S. Carim",
-      address: "Saguiaran, LDS",
-      age: "22",
-      appointment: "October 06, 2021",
-      citizenship: "Filipino",
-      status: "Active",
-      position: "Manager IV",
-      religion: "Islam",
-      salary: "20,000.00",
-      sex: "Female",
-      work_status: "Contructual",
-      department: "Alumni Relation",
-      bank_membership: "GSIS, PAG-IBIG, PHILHEALTH",
-    },
-    {
-      id: "201813850",
-      name: "Azimah Ampuan",
-      address: "Sarimanok, MC, LDS",
-      age: "22",
-      appointment: "October 06, 2021",
-      citizenship: "Filipino",
-      status: "Active",
-      position: "Manager V",
-      religion: "Islam",
-      salary: "20,000.00",
-      sex: "Female",
-      work_status: "Item",
-      department: "Registrar",
-      bank_membership: "GSIS, PAG-IBIG, PHILHEALTH",
-    },
-    {
-      id: "201813674",
-      name: "Inshidar P. Panganting",
-      address: "Saguiaran, LDS",
-      age: "22",
-      appointment: "October 06, 2021",
-      citizenship: "Filipino",
-      status: "Active",
-      position: "Manager II",
-      religion: "Islam",
-      salary: "20,000.00",
-      sex: "Female",
-      work_status: "Contructual",
-      department: "HRDO",
-      bank_membership: "GSIS, PAG-IBIG, PHILHEALTH",
-    },
-    {
-      id: "201811169",
-      name: "Norol Izzah Abdulrahim",
-      address: "Bacolod Chico, MC, LDS",
-      age: "20",
-      appointment: "October 06, 2021",
-      citizenship: "Filipino",
-      status: "Active",
-      position: "Manager III",
-      religion: "Islam",
-      salary: "20,000.00",
-      sex: "Female",
-      work_status: "Item",
-      department: "OVCAA",
-      bank_membership: "GSIS, PAG-IBIG, PHILHEALTH",
     },
   ];
 }

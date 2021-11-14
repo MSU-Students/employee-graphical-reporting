@@ -1,4 +1,5 @@
 export interface Info {
+  [x: string]: any;
   id: string,
   fName: string,
   mName: string,
@@ -12,13 +13,14 @@ export interface Info {
   status: string,
   position: string,
   salary: string,
-  gender: string,
+  gender: 'Male' | 'Female',
   workStatus: string,
   department: string,
 }
 
  export interface EmployeeStateInterface {
    employee: Info[];
+   activeEmployee?: Info;
  }
 
 function state(): EmployeeStateInterface {

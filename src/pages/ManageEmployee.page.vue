@@ -8,13 +8,15 @@
     <br />
 
     <q-table
-      :rows="Employee"
+      title="Employees List:"
+      :rows="employee"
       :columns="columns"
       row-key="name"
       :rows-per-page-options="[0]"
       hide-bottom
+      :filter="filter"
     >
-      <template v-slot:top>
+      <template v-slot:top-right>
         <div class="q-pa-md q-gutter-sm row">
           <q-input color="brown" outlined dense v-model="filter" placeholder="Search">
             <template v-slot:append>
@@ -28,7 +30,7 @@
             icon="add"
             @click="onNewEmployee()"
           />
-          <q-dialog v-model="addEmployee">
+          <q-dialog v-model="activeUser" persistent>
             <q-card style="width: 600px">
               <q-card-section class="row">
                 <div class="text-h6">
@@ -118,7 +120,12 @@
               </q-card-section>
               <q-card-actions align="center">
                 <q-btn label="Cancel" color="red-10" v-close-popup />
-                <q-btn label="Add" color="blue-10" v-close-popup />
+                <q-btn
+                  label="Add"
+                  color="blue-10"
+                  @click="onSaveEmployee"
+                  v-close-popup
+                />
               </q-card-actions>
             </q-card>
           </q-dialog>
@@ -142,6 +149,7 @@
                 color="blue-10"
                 icon="edit"
                 size="sm"
+                dense
                 @click="editRow = true"
               />
               <q-dialog v-model="editRow">
@@ -264,22 +272,24 @@
 </template>
 
 <script lang="ts">
-import { Info } from "src/store/Employee/state";
+import { Info } from "src/store/employee/state";
 import { Vue, Options } from "vue-class-component";
 import { mapActions, mapState } from "vuex";
 
 @Options({
   computed: {
-    ...mapState("Employee", ["employee"]),
+    ...mapState("employee", ["employee", "activeEmployee"]),
   },
   methods: {
-    ...mapActions("Employee", ["newEmployee"]),
+    ...mapActions("employee", ["newEmployee", "editEmployee", "deleteEmployee"]),
   },
 })
-export default class ManageAccount extends Vue {
+export default class ManageEmployee extends Vue {
   // vuex properties
-  Employee!: Info[];
-  newEmployee!: (Employee: Info) => Promise<void>;
+  employee!: Info[];
+  newEmployee!: (employee: Info) => Promise<void>;
+  editEmployee!: (employee: Info) => Promise<void>;
+  deleteEmployee!: (employee: Info) => Promise<void>;
 
   //local
   columns = [
@@ -336,42 +346,59 @@ export default class ManageAccount extends Vue {
       field: "department",
     },
   ];
-  dialog = false;
+  confirmDelete = false;
   cancelEnabled = true;
-  addEmployee = false;
+  activeUser = false;
   editRow = false;
-  employee: Info = {
-    fName: " ",
-    mName: " ",
-    lName: " ",
-    id: " ",
-    membership: " ",
-    department: " ",
-    address: " ",
-    age: " ",
-    citizenship: " ",
-    appointmentDate: " ",
-    status: " ",
-    religion: " ",
-    position: " ",
-    salary: " ",
-    workStatus: " ",
-    gender: " ",
+  defaultEmployee: Info = {
+    fName: "",
+    mName: "",
+    lName: "",
+    id: "",
+    membership: "",
+    department: "",
+    address: "",
+    age: "",
+    citizenship: "",
+    appointmentDate: "",
+    status: "",
+    religion: "",
+    position: "",
+    salary: "",
+    workStatus: "",
+    gender: "Female",
   };
   filter = "";
-  options = ["GSIS", "PHILHEALTH", "PAG-IBIG"];
-  option = ["Male", "Female"];
-  presentEmployee = { ...this.employee };
+  options = ["GSIS", "PhilHealth", "PAG-IBIG"];
+  presentEmployee = { ...this.defaultEmployee };
 
   onNewEmployee() {
-    this.presentEmployee = { ...this.employee };
+    this.presentEmployee = { ...this.defaultEmployee };
     this.editRow = false;
-    this.addEmployee = true;
+    this.activeUser = true;
   }
+
+  onEditEmployee(employee: Info) {
+    this.presentEmployee = { ...employee };
+    this.editRow = true;
+    this.activeUser = false;
+  }
+
+  onDleteEmployee(employee: Info) {
+    this.presentEmployee = {...employee };
+    this.confirmDelete = true;
+  }
+
   async onSaveEmployee() {
     if (!this.editRow) {
       await this.newEmployee(this.presentEmployee);
+    } else {
+      await this.editEmployee(this.presentEmployee);
     }
+  }
+  async onConfirmDelete() {
+    await this.deleteEmployee(this.presentEmployee);
+    this.confirmDelete = true;
   }
 }
 </script>

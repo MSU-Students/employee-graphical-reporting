@@ -6,9 +6,11 @@ import {
   useStore as vuexUseStore,
 } from 'vuex'
 
-import employee from './Employee'
-import { EmployeeStateInterface } from './Employee/state';
+import employee from './employee'
+import { EmployeeStateInterface } from './employee/state';
 
+import account from './account';
+import { AccountStateInterface } from './account/state';
 /*
  * If not building with SSR mode, you can
  * directly export the Store instantiation;
@@ -22,7 +24,8 @@ export interface StateInterface {
   // Define your own store structure, using submodules if needed
   // example: ExampleStateInterface;
   // Declared as unknown to avoid linting issue. Best to strongly type as per the line above.
-  employee: EmployeeStateInterface
+  employee: EmployeeStateInterface,
+  account: AccountStateInterface,
 }
 
 // provide typings for `this.$store`
@@ -39,7 +42,8 @@ export default store(function (/* { ssrContext } */) {
   const Store = createStore<StateInterface>({
     modules: {
       // example
-      employee
+      employee,
+      account
     },
 
     // enable strict mode (adds overhead!)

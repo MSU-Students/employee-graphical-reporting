@@ -9,7 +9,7 @@
       ADMIN
     </div>
 
-    <div class="q-px-xl flex flex-center">
+    <div class="flex flex-center">
       <q-table
         :rows="rows"
         :columns="columns"

@@ -8,13 +8,15 @@
     <br />
 
     <q-table
-      :rows="rows"
+      title="Users's Accounts:"
+      :rows="account"
       :columns="columns"
       row-key="name"
       :rows-per-page-options="[0]"
       hide-bottom
+      :filter="filter"
     >
-      <template v-slot:top>
+      <template v-slot:top-right>
         <div class="q-pa-md q-gutter-sm row">
           <q-input
             color="brown"
@@ -32,9 +34,9 @@
             label="Create New Account"
             color="brown-10"
             icon="add"
-            @click="addUser = true"
+            @click="onNewAccount()"
           />
-          <q-dialog v-model="addUser">
+          <q-dialog v-model="activeUser" persistent>
             <q-card style="width: 600px">
               <q-card-section class="row">
                 <div class="text-h6">Create New User</div>
@@ -44,38 +46,67 @@
 
               <q-card-section class="q-gutter-y-sm">
                 <q-input
-                  v-model="name"
+                  v-model="presentAccount.fName"
                   dense
                   outlined
-                  type="text"
-                  label="Employee Name"
+                  label="First Name"
+                >
+                </q-input>
+                <q-input
+                  v-model="presentAccount.mInitial"
+                  dense
+                  outlined
+                  label="Middle Initial"
+                >
+                </q-input>
+                <q-input
+                  v-model="presentAccount.lName"
+                  dense
+                  outlined
+                  label="Last Name"
                 >
                 </q-input>
                 <q-select
                   outlined
-                  v-model="role"
+                  v-model="presentAccount.designation"
                   :options="options"
                   label="Designation"
                 />
                 <q-input
-                  v-model="department"
+                  v-model="presentAccount.department"
                   dense
                   outlined
                   label="Department"
                 />
-                <q-input v-model="email" dense outlined label="Email" />
-                <q-input v-model="username" dense outlined label="Username" />
-                <q-input v-model="password" dense outlined label="Password" />
                 <q-input
-                  v-model="dateCreated"
+                  v-model="presentAccount.email"
                   dense
                   outlined
+                  label="Email"
+                />
+                <q-input
+                  v-model="presentAccount.username"
+                  dense
+                  outlined
+                  label="Username"
+                />
+                <q-input
+                  v-model="presentAccount.password"
+                  dense
+                  outlined
+                  label="Password"
+                />
+                <q-input
+                  v-model="presentAccount.dateCreated"
+                  dense
+                  outlined
+                  type="date"
                   label="Date Created"
                 />
               </q-card-section>
               <q-card-actions align="center">
                 <q-btn label="Cancel" color="red-10" v-close-popup />
-                <q-btn label="Add" color="blue-10" />
+                <q-btn label="Add" color="blue-10" @click="onSaveAccount" v-close-popup/>
               </q-card-actions>
             </q-card>
           </q-dialog>
@@ -100,7 +131,7 @@
                 icon="edit"
                 size="sm"
                 dense
-                @click="editRow = true"
+                @click="onEditAccount(props.row)"
               />
               <q-dialog v-model="editRow">
                 <q-card style="width: 600px">
@@ -112,49 +143,68 @@
 
                   <q-card-section class="q-gutter-y-sm">
                     <q-input
-                      v-model="name"
+                      v-model="presentAccount.fName"
                       dense
                       outlined
-                      type="text"
-                      label="Employee Name"
+                      label="First Name"
+                    >
+                    </q-input>
+                    <q-input
+                      v-model="presentAccount.mInitial"
+                      dense
+                      outlined
+                      label="Middle Initial"
+                    >
+                    </q-input>
+                    <q-input
+                      v-model="presentAccount.lName"
+                      dense
+                      outlined
+                      label="Last Name"
                     >
                     </q-input>
                     <q-select
                       outlined
-                      v-model="role"
+                      v-model="presentAccount.designation"
                       :options="options"
                       label="Designation"
                     />
                     <q-input
-                      v-model="department"
+                      v-model="presentAccount.department"
                       dense
                       outlined
                       label="Department"
                     />
-                    <q-input v-model="email" dense outlined label="Email" />
                     <q-input
-                      v-model="username"
+                      v-model="presentAccount.email"
+                      dense
+                      outlined
+                      label="Email"
+                    />
+                    <q-input
+                      v-model="presentAccount.username"
                       dense
                       outlined
                       label="Username"
                     />
                     <q-input
-                      v-model="password"
+                      v-model="presentAccount.password"
                       dense
                       outlined
                       label="Password"
                     />
                     <q-input
-                      v-model="dateCreated"
+                      v-model="presentAccount.dateCreated"
                       dense
                       outlined
+                      type="date"
                       label="Date Created"
                     />
                   </q-card-section>
 
                   <q-card-actions align="center">
                     <q-btn label="Cancel" color="red-10" v-close-popup />
-                    <q-btn label="Add" color="blue-10"/>
+                    <q-btn label="Save Changes" color="blue-10" @click="onEditAccount" v-close-popup/>
                   </q-card-actions>
                 </q-card>
               </q-dialog>
@@ -166,9 +216,9 @@
                 flat
                 round
                 dense
-                @click="dialog = true"
+                @click="onDeleteAccount(props.row)"
               />
-              <q-dialog v-model="dialog" persistent>
+              <q-dialog v-model="confirmDelete" persistent>
                 <q-card>
                   <q-card-section class="row items-center">
                     <q-avatar
@@ -177,17 +227,16 @@
                       color="red"
                       text-color="white"
                     />
-                    <span class="q-ml-sm">Confirm Delete?</span>
+                    <span class="q-ml-sm">Confirm Delete {{presentAccount.fName}}?</span>
                   </q-card-section>
                   <q-card-actions align="right">
                     <q-btn
                       flat
                       label="Cancel"
                       color="primary"
-                      v-close-popup="cancelEnabled"
-                      :disable="!cancelEnabled"
+                      v-close-popup
                     />
-                    <q-btn flat label="Delete" color="primary" v-close-popup />
+                    <q-btn flat label="Delete" color="primary" @click="onConfirmDelete" v-close-popup/>
                   </q-card-actions>
                 </q-card>
               </q-dialog>
@@ -204,22 +253,33 @@
 </template>
 
 <script lang="ts">
-import { ref } from "vue";
+import { AccountInfo } from "src/store/account/state";
 import { Vue, Options } from "vue-class-component";
+import { mapActions, mapState } from "vuex";
 
-interface IRow {
-  name: string;
-}
-
-@Options({})
+@Options({
+  computed: {
+    ...mapState("account", ["account", "activeAccount"]),
+  },
+  methods: {
+    ...mapActions("account", ["newAccount", "editAccount", "deleteAccount"]),
+  },
+})
 export default class ManageAccount extends Vue {
+  account!: AccountInfo[];
+  newAccount!: (account: AccountInfo) => Promise<void>;
+  editAccount!: (account: AccountInfo) => Promise<void>;
+  deleteAccount!: (account: AccountInfo) => Promise<void>;
+
   columns = [
     {
       name: "name",
       required: true,
       label: "Full Name",
       align: "left",
-      field: "name",
+      field: (row: AccountInfo) =>
+        row.fName + "" + row.mInitial + "" + row.lName,
+      format: (val: string) => `${val}`,
     },
     {
       name: "designation",
@@ -244,56 +304,53 @@ export default class ManageAccount extends Vue {
     },
     { name: "status", align: "left", label: "Status", field: "status" },
   ];
-  rows = [
-    {
-      name: "Riza B. Maruhom",
-      designation: "Director",
-      department: "HRDO",
-      email: "rizamaruhom@gmail.com",
-      username: "riza",
-      password: "riza",
-      dateCreated: "December 23, 1998",
-      status: "Active",
-    },
-    {
-      name: "Reshyl B. Maruhom",
-      designation: "Admin",
-      department: "HRDO",
-      email: "reshylmaruhom@gmail.com",
-      username: "rshyl",
-      password: "maruhom",
-      dateCreated: "December 23, 1998",
-      status: "Active",
-    },
-    {
-      name: "Aminollah Sangcopan",
-      designation: "Director",
-      department: "HRDO",
-      email: "aminollahsangcopan@gmail.com",
-      username: "aminollah",
-      password: "sangcopan",
-      dateCreated: "December 23, 1998",
-      status: "Deactive",
-    },
-  ];
-  dialog = false;
+  confirmDelete = false;
   cancelEnabled = true;
-  addUser = false;
+  activeUser = false;
   editRow = false;
-  name = "";
-  username = "";
-  password = "";
-  email = "";
-  designation = "";
-  role = "";
+  defaultAccount: AccountInfo = {
+    fName: "",
+    mInitial: "",
+    lName: "",
+    designation: "",
+    department: "",
+    email: "",
+    username: "",
+    password: "",
+    dateCreated: "",
+    status: "Active",
+  };
+  presentAccount = { ...this.defaultAccount };
   filter = "";
   options = ["Admin", "Director"];
-  department = "";
-  dateCreated = "";
 
-  onItemClick() {
-    console.log("Clicked!");
+  onNewAccount() {
+    this.presentAccount = { ...this.defaultAccount };
+    this.editRow = false;
+    this.activeUser = true;
+  }
+
+  onEditAccount(account: AccountInfo) {
+    this.presentAccount = { ...account };
+    this.editRow = true;
+    this.activeUser = false;
+  }
+
+  onDeleteAccount(account: AccountInfo) {
+    this.presentAccount = { ...account };
+    this.confirmDelete = true;
+  }
+
+  async onSaveAccount() {
+    if (!this.editRow) {
+      await this.newAccount(this.presentAccount);
+    } else {
+      await this.editAccount(this.presentAccount);
+    }
+  }
+  async onConfirmDelete() {
+    await this.deleteAccount(this.presentAccount);
+    this.confirmDelete = true;
   }
 }
 </script>
-
